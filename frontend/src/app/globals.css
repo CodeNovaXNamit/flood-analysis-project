@@ -1,0 +1,315 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-base: #F8FAFC;
+    --bg-surface: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --bg-elevated: #F1F5F9;
+    --border-subtle: #E2E8F0;
+    --border-strong: #CBD5E1;
+    --text-primary: #0F172A;
+    --text-muted: #64748B;
+    --accent-blue: #2563EB;
+    
+    /* Scientific Risk Palette */
+    --risk-low: #22C55E;    
+    --risk-medium: #EAB308; 
+    --risk-high: #EF4444;   
+
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --bg-base: #060D1A;
+    --bg-surface: #0B1528;
+    --bg-card: #0F1E35;
+    --bg-elevated: #152540;
+    --border-subtle: #1A2E4A;
+    --border-strong: #1E3A5F;
+    --text-primary: #E8F0FE;
+    --text-muted: #6B8EB3;
+    --accent-blue: #3B82F6;
+    
+    --risk-low: #4ADE80;    
+    --risk-medium: #FDE047; 
+    --risk-high: #EF4444;   
+
+    --background: 217 61% 6%;
+    --foreground: 210 40% 98%;
+    --card: 217 56% 14%;
+    --card-foreground: 210 40% 98%;
+    --popover: 217 61% 10%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 47% 11%;
+    --secondary: 217 32% 17%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 32% 17%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 217 32% 17%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217 32% 17%;
+    --input: 217 32% 17%;
+    --ring: 217 91% 60%;
+  }
+}
+
+body {
+  @apply bg-[var(--bg-base)] text-[var(--text-primary)] font-sans antialiased overflow-hidden transition-colors duration-300;
+}
+
+/* Animations */
+@keyframes radar-pulse {
+  0% { transform: scale(0.5); opacity: 0.8; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+@keyframes scan-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes typewriter {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes glow-pulse {
+  0% { box-shadow: 0 0 5px rgba(59, 130, 246, 0.1); }
+  50% { box-shadow: 0 0 15px rgba(59, 130, 246, 0.3); }
+  100% { box-shadow: 0 0 5px rgba(59, 130, 246, 0.1); }
+}
+
+@keyframes ward-entrance {
+  0% { opacity: 0; transform: scale(0.98); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pin-bounce {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes scanlines {
+  from { background-position: 0 0; }
+  to { background-position: 0 100%; }
+}
+
+@keyframes glitch {
+  0% { opacity: 1; transform: translateX(0); }
+  10% { opacity: 0.8; transform: translateX(2px); }
+  20% { opacity: 1; transform: translateX(-2px); }
+  30% { opacity: 0.9; transform: translateX(0); }
+  100% { opacity: 1; }
+}
+
+@keyframes bracket-tl {
+  from { transform: translate(-20px, -20px); opacity: 0; }
+  to { transform: translate(0, 0); opacity: 1; }
+}
+@keyframes bracket-tr {
+  from { transform: translate(20px, -20px); opacity: 0; }
+  to { transform: translate(0, 0); opacity: 1; }
+}
+@keyframes bracket-bl {
+  from { transform: translate(-20px, 20px); opacity: 0; }
+  to { transform: translate(0, 0); opacity: 1; }
+}
+@keyframes bracket-br {
+  from { transform: translate(20px, 20px); opacity: 0; }
+  to { transform: translate(0, 0); opacity: 1; }
+}
+
+@keyframes system-flash {
+  0% { background: transparent; }
+  50% { background: rgba(6, 182, 212, 0.4); }
+  100% { background: transparent; }
+}
+
+.animate-radar {
+  animation: radar-pulse 1.5s infinite ease-out;
+}
+
+.animate-scan {
+  animation: scan-rotate 4s linear infinite;
+}
+
+.animate-glitch {
+  animation: glitch 0.2s ease-in-out;
+}
+
+.shimmer-bg {
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.05), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite linear;
+}
+
+.glow-readiness {
+  animation: glow-pulse 2s infinite ease-in-out;
+}
+
+/* 3D Depth Utilities */
+.depth-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid var(--border-subtle);
+  transform: perspective(800px) rotateX(2deg);
+}
+.dark .depth-card {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+.depth-card:hover {
+  transform: perspective(800px) rotateX(0deg) translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border-color: var(--accent-blue);
+}
+
+/* Hex Grid Pattern */
+.hex-grid {
+  background-image: 
+    radial-gradient(circle at center, rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+    linear-gradient(30deg, transparent 40%, rgba(59, 130, 246, 0.02) 40%, rgba(59, 130, 246, 0.02) 60%, transparent 60%),
+    linear-gradient(150deg, transparent 40%, rgba(59, 130, 246, 0.02) 40%, rgba(59, 130, 246, 0.02) 60%, transparent 60%);
+  background-size: 40px 40px;
+}
+
+/* Scanline Overlay */
+.scanlines::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+  z-index: 10002;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+}
+
+/* Focus & Blur Map Effects */
+.blurred-ward {
+  filter: blur(1.5px) grayscale(0.5);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.4;
+}
+
+.focused-ward {
+  filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.3));
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  stroke-width: 3px !important;
+}
+
+/* Professional Pin Styles */
+.professional-pin-wrapper {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pin-bounce 2s infinite ease-in-out;
+}
+
+.pin-pulse {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: rgba(59, 130, 246, 0.4);
+  border-radius: 50%;
+  animation: radar-pulse 2s infinite ease-out;
+}
+
+.pin-shadow {
+  position: absolute;
+  bottom: -4px;
+  width: 12px;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  filter: blur(2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
+}
+
+/* Leaflet Popup Styling */
+.flood-popup .leaflet-popup-content-wrapper {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  padding: 0;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+.flood-popup .leaflet-popup-tip {
+  background: var(--bg-surface);
+}
+.flood-popup .leaflet-popup-content {
+  margin: 0;
+}
+
+/* Ward Labels GIS Style */
+.ward-label-tooltip {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: white !important;
+  font-weight: 700 !important;
+  font-size: 10px !important;
+  text-shadow: 0 0 2px #000, 0 0 4px #000 !important;
+  pointer-events: none !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: center;
+  width: 80px;
+  line-height: 1.2;
+}
+
+.ward-label-tooltip::before {
+  display: none !important;
+}
+
+.leaflet-container {
+  background: var(--bg-base) !important;
+}

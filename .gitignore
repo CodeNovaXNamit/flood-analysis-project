@@ -95,3 +95,6 @@ dist/
 Thumbs.db
 .idea/
 .vscode/
+.agents/
+.git-backups/
+.idx/

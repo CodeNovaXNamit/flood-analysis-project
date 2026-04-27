@@ -1,0 +1,14 @@
+node_modules
+.next
+typecheck_output.txt
+project (2).zip
+local-react-gis/node_modules
+.git
+.agents
+.idx
+.vscode
+docs
+data
+README.md
+skills-lock.json
+apphosting.yaml
