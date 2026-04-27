@@ -44,6 +44,14 @@ interface SidebarProps {
   apiBaseUrl: string;
 }
 
+interface AdvisorWardInput {
+  wardId: string;
+  wardName: string;
+  risk: number;
+  populationAffected: number;
+  trend: 'increasing' | 'stable' | 'decreasing';
+}
+
 export default function Sidebar({
   geoJSON,
   hotspots,
@@ -70,6 +78,20 @@ export default function Sidebar({
     .reduce((sum, f) => sum + f.properties.population_affected, 0);
 
   const wardProperties = useMemo(() => geoJSON.features.map(f => f.properties), [geoJSON]);
+  const topAdvisorWards = useMemo<AdvisorWardInput[]>(
+    () =>
+      [...wardProperties]
+        .sort((a, b) => b.flood_risk - a.flood_risk)
+        .slice(0, 5)
+        .map((ward) => ({
+          wardId: ward.ward_id,
+          wardName: ward.ward_name,
+          risk: ward.flood_risk,
+          populationAffected: ward.population_affected,
+          trend: ward.trend,
+        })),
+    [wardProperties]
+  );
 
   const filteredWards = useMemo(() => {
     if (!searchQuery) return wardProperties;
@@ -131,6 +153,10 @@ export default function Sidebar({
             hotspotsCount={wardRiskHotspots}
             rainfallMm={weather.rainfall_mm}
             weatherCondition={weather.condition}
+            avgRiskPercent={Math.round(avgRisk * 100)}
+            totalPopulationAtRisk={totalPopAtRisk}
+            topWards={topAdvisorWards}
+            latestPipelineRun={latestPipelineRun}
           />
         </section>
 

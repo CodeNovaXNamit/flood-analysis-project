@@ -4,6 +4,7 @@ Flood-risk analysis workspace for Delhi with:
 
 - a FastAPI backend that accepts rainfall CSV uploads and returns coordinate-level flood-risk predictions
 - a Next.js frontend dashboard for ward visualization, hotspot inspection, and scenario uploads
+- a Gemini-powered flood response copilot that converts structured flood telemetry into operational recommendations
 - Python data preparation and model code under `src/`
 
 ## Repository Layout
@@ -15,9 +16,39 @@ Flood-risk analysis workspace for Delhi with:
 - `configs/` project configuration files
 - `docs/` architecture and methodology notes
 - `tests/` Python tests
+- `generate_project_documentation_pdf.py` PDF generator for the complete project report
+- `generate_gemini_integration_documentation_pdf.py` PDF generator for the Gemini integration strategy report
 - `data/processed/models/` small model artifacts required by the API at runtime
 - `data/processed/references/` reference grid files and example input template
 - `outputs/` generated pipeline runs and local SQLite database files
+
+## Gemini Integration
+
+The frontend now includes a `Gemini Flood Copilot` powered by Genkit and the Google GenAI plugin.
+
+It uses real structured project data to generate:
+
+- escalation level
+- ranked municipal actions
+- ward-level focus recommendations
+- short flood-risk projection
+- public advisory text
+
+The AI layer does not replace the flood prediction pipeline. It interprets the project’s deterministic and ML outputs for operators and judges.
+
+### Gemini Setup
+
+Set one of these variables in `frontend/.env`:
+
+```bash
+GEMINI_API_KEY=your_key_here
+# or
+GOOGLE_API_KEY=your_key_here
+# or
+GOOGLE_GENAI_API_KEY=your_key_here
+```
+
+If no Google AI key is present, the copilot falls back to a local deterministic advisory path so the UI still remains functional.
 
 ## What The Backend Expects
 
@@ -81,6 +112,8 @@ If you want the frontend to call a non-default backend URL, set:
 NEXT_PUBLIC_API_BASE_URL=http://127.0.0.1:8000
 ```
 
+If you want live Gemini-backed recommendations in the copilot dialog, also add one of the Gemini API keys shown above to `frontend/.env`.
+
 ### 3. Docker Option
 
 You can also run the backend and frontend with Docker:
@@ -124,3 +157,29 @@ Run Python tests from the repo root:
 ```bash
 pytest
 ```
+
+Run the frontend type check:
+
+```bash
+cd frontend
+npm run typecheck
+```
+
+## Documentation PDFs
+
+Generate the full project documentation PDF:
+
+```bash
+python generate_project_documentation_pdf.py
+```
+
+Generate the Gemini integration strategy PDF:
+
+```bash
+python generate_gemini_integration_documentation_pdf.py
+```
+
+Generated outputs:
+
+- `Flood_Analysis_Project_Documentation.pdf`
+- `Gemini_Integration_Strategy_Flood_Analysis_Project.pdf`
