@@ -1,0 +1,29 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: flood-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - backend_outputs:/app/outputs
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ../Dockerfile.frontend
+      args:
+        NEXT_PUBLIC_API_BASE_URL: http://backend:8000
+    container_name: flood-frontend
+    depends_on:
+      - backend
+    environment:
+      NEXT_PUBLIC_API_BASE_URL: http://backend:8000
+    ports:
+      - "9002:9002"
+    restart: unless-stopped
+
+volumes:
+  backend_outputs:

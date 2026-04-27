@@ -1,4 +1,4 @@
-from src.models.evaluate import main
+from src.models.train import main
 
 
 if __name__ == "__main__":

@@ -1,0 +1,3 @@
+class 0: precision=0.9975 recall=0.9439 f1=0.9699 support=252140
+class 1: precision=0.5804 recall=0.9700 f1=0.7262 support=20174
+accuracy: 0.9458

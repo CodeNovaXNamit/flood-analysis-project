@@ -1,0 +1,28 @@
+{
+  "features": [
+    "grid_latitude",
+    "grid_longitude",
+    "precipitation_mm",
+    "lag1",
+    "lag2",
+    "lag3",
+    "rain_3d",
+    "rain_5d",
+    "rain_7d",
+    "cumulative_rainfall",
+    "average_intensity",
+    "trend",
+    "runoff_value",
+    "runoff_coefficient",
+    "elevation_m",
+    "drainage_density_km_per_km2",
+    "total_population",
+    "slope",
+    "month_sin",
+    "month_cos",
+    "seasonal_encoder"
+  ],
+  "target": "proxy_flood_label",
+  "note": "Proxy target derived heuristically from rainfall, runoff, elevation, drainage, slope, and population.",
+  "model_note": "xgboost, sklearn forests, and xgboost package were unavailable; local custom ensemble components were used instead."
+}

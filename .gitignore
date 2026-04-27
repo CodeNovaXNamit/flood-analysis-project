@@ -1,51 +1,97 @@
 # =====================
-# DATA (CRITICAL)
-# =====================
-data/
-outputs/
-
-# =====================
-# MODELS
-# =====================
-models/*.pkl
-models/*.h5
-models/*.joblib
-
-# =====================
 # PYTHON
 # =====================
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+.venv/
+venv/
+env/
 
 # =====================
-# ENV
+# ENV / SECRETS
 # =====================
 .env
+.env.*
+!.env.example
 
 # =====================
-# NOTEBOOKS
+# DATA AND GENERATED OUTPUTS
+# Keep the repo lightweight. Commit only the small runtime assets
+# needed by the API from data/processed/models and data/processed/references.
 # =====================
-.ipynb_checkpoints/
+data/raw/
+data/interim/
+data/external/
+outputs/
+finale/
+
+data/processed/datasets/
+data/processed/frontend/
+data/processed/scenarios/
+!data/processed/scenarios/sample_new_data.csv
+!data/processed/scenarios/sample_week_flood_rainfall.csv
+
+data/processed/*.csv
+data/processed/*.geojson
+
+data/processed/models/
+!data/processed/models/
+data/processed/models/*
+!data/processed/models/coordinate_static_features.csv
+!data/processed/models/neural_net_model.pt
+!data/processed/models/proxy_flood_classification_report.txt
+!data/processed/models/proxy_flood_metrics.json
+!data/processed/models/proxy_flood_model_info.json
+!data/processed/models/random_forest_model.pkl
+!data/processed/models/xgb_like_model.pkl
+
+data/processed/references/
+!data/processed/references/
+data/processed/references/*
+!data/processed/references/delhi_test_reference_avg_rainfall.csv
+!data/processed/references/delhi_unique_model_grid_coordinates.csv
+!data/processed/references/precip_grid_points.csv
+!data/processed/references/test_input_template.csv
 
 # =====================
-# LOGS
+# NODE / FRONTEND
+# =====================
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/.firebase/
+frontend/local-react-gis/node_modules/
+frontend/local-react-gis/dist/
+frontend/typecheck_output.txt
+
+# =====================
+# LOGS / TEMP / ARCHIVES
 # =====================
 logs/
 *.log
-
-# =====================
-# NODE (frontend)
-# =====================
-frontend/node_modules/
+*.tmp
+*.temp
+*.zip
+*.rar
+*.7z
 
 # =====================
 # BUILD FILES
 # =====================
-dist/
 build/
+dist/
 
 # =====================
-# OS FILES
+# IDE / OS
 # =====================
 .DS_Store
 Thumbs.db
+.idea/
+.vscode/
