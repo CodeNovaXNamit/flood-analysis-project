@@ -50,6 +50,8 @@ GOOGLE_GENAI_API_KEY=your_key_here
 
 If no Google AI key is present, the copilot falls back to a local deterministic advisory path so the UI still remains functional.
 
+For local frontend setup, you can copy `frontend/.env.example` into `frontend/.env` and fill in the values you want to use.
+
 ## What The Backend Expects
 
 The upload API expects a rainfall CSV with these columns:
@@ -114,6 +116,47 @@ NEXT_PUBLIC_API_BASE_URL=http://127.0.0.1:8000
 
 If you want live Gemini-backed recommendations in the copilot dialog, also add one of the Gemini API keys shown above to `frontend/.env`.
 
+### 2A. Frontend On Vercel
+
+Deploy the `frontend/` app as a separate Vercel project with:
+
+- Framework Preset: `Next.js`
+- Root Directory: `frontend`
+- Build Command: `next build`
+- Output Directory: leave empty
+- Install Command: `npm install`
+
+Set these Vercel environment variables for the frontend project:
+
+```bash
+NEXT_PUBLIC_API_BASE_URL=https://your-backend-domain
+GEMINI_API_KEY=your_key_here
+```
+
+The frontend should not be deployed with the `FastAPI` preset because the repo root is a monorepo, not a single Python app.
+
+### 2B. Backend On A Python Host
+
+Deploy the `api/` service separately on a Python-friendly host such as Render, Railway, Fly.io, or Google Cloud Run.
+
+Typical backend start command:
+
+```bash
+uvicorn api.app:app --host 0.0.0.0 --port $PORT
+```
+
+Set backend CORS so the Vercel frontend can call it:
+
+```bash
+ALLOWED_ORIGINS=https://your-frontend.vercel.app
+```
+
+You can provide multiple origins as a comma-separated list:
+
+```bash
+ALLOWED_ORIGINS=https://your-frontend.vercel.app,https://your-custom-domain.com
+```
+
 ### 3. Docker Option
 
 You can also run the backend and frontend with Docker:
@@ -135,6 +178,8 @@ This repo has been prepared to keep Git history smaller and cleaner:
 - frontend `node_modules` and `.next` output are ignored
 
 Before pushing, review `git status` and decide whether you want to keep any currently untracked local-only files.
+
+If a real API key was ever committed into a tracked `.env` file, rotate that key before publishing or redeploying.
 
 For a public or lightweight repo, keep these out of Git:
 
