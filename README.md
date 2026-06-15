@@ -1,4 +1,4 @@
-# Flood Analysis Project
+# Flood Analysis Project"
 
 Flood-risk analysis workspace for Delhi with:
 
@@ -7,7 +7,7 @@ Flood-risk analysis workspace for Delhi with:
 - a Gemini-powered flood response copilot that converts structured flood telemetry into operational recommendations
 - Python data preparation and model code under `src/`
 
-## Repository Layout
+## Repository Layout:
 
 - `api/` FastAPI app, upload endpoints, pipeline orchestration, and local SQLite run history
 - `frontend/` Next.js dashboard UI
@@ -22,7 +22,7 @@ Flood-risk analysis workspace for Delhi with:
 - `data/processed/references/` reference grid files and example input template
 - `outputs/` generated pipeline runs and local SQLite database files
 
-## Gemini Integration
+## Gemini Integration:
 
 The frontend now includes a `Gemini Flood Copilot` powered by Genkit and the Google GenAI plugin.
 
@@ -36,7 +36,7 @@ It uses real structured project data to generate:
 
 The AI layer does not replace the flood prediction pipeline. It interprets the project’s deterministic and ML outputs for operators and judges.
 
-### Gemini Setup
+### Gemini Setup:
 
 Set one of these variables in `frontend/.env`:
 
